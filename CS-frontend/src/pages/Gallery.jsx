@@ -6,21 +6,29 @@ import "/src/gallery.css"
 import Footer from "../assets/Footer";
 
 export default function Gallery() {
-    const [gallery, setGallery] = useState([])
+    const [gallery, setGallery] = useState(() => {
+        const cached = sessionStorage.getItem('galleryData');
+        return cached ? JSON.parse(cached) : [];
+    })
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(() => !sessionStorage.getItem('galleryData'))
     const timeoutRef = useRef(null)
     const animationRefs = useRef([])
     const [selectedImage, setSelectedImage] = useState(null)
 
 
     async function fetchGallery() {
-        setLoading(true)
-        const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Galery.json");
-        const data = await res.json()
-        setGallery(data)
-        setLoading(false)
-        console.log(data)
+        if (!sessionStorage.getItem('galleryData')) setLoading(true);
+        try {
+            const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Galery.json");
+            const data = await res.json()
+            setGallery(data)
+            sessionStorage.setItem('galleryData', JSON.stringify(data));
+        } catch (error) {
+            console.error("Error fetching gallery:", error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {

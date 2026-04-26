@@ -5,16 +5,25 @@ import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
 
 export default function Project() {
-    const [project, setProject] = useState([]);
+    const [project, setProject] = useState(() => {
+        const cached = sessionStorage.getItem('projectData');
+        return cached ? JSON.parse(cached) : [];
+    });
     const [search, setSearch] = useState("")
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(() => !sessionStorage.getItem('projectData'))
 
     async function fetchProject() {
-        setLoading(true)
-        const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Project.json");
-        const data = await res.json();
-        setProject(data)
-        setLoading(false)
+        if (!sessionStorage.getItem('projectData')) setLoading(true);
+        try {
+            const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Project.json");
+            const data = await res.json();
+            setProject(data);
+            sessionStorage.setItem('projectData', JSON.stringify(data));
+        } catch (error) {
+            console.error("Error fetching project:", error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {

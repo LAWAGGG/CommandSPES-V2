@@ -10,12 +10,14 @@ import Gallery from './pages/Gallery'
 import StudentDetail from './pages/StudentDetail'
 import GalleryDetail from './pages/GalleryDetail'
 import ProjectDetail from './pages/ProjectDetail'
+import ScrollToTop from './ScrollToTop'
 
 function App() {
  
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
           <Route path="/" element={<Home></Home>}/>
           <Route path="/students" element={<Student></Student>}/>

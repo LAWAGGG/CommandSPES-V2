@@ -5,16 +5,24 @@ import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
 
 export default function Student() {
-    const [student, setStudent] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [student, setStudent] = useState(() => {
+        const cached = sessionStorage.getItem('studentData');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [loading, setLoading] = useState(() => !sessionStorage.getItem('studentData'))
 
     async function fetchStudent() {
-        setLoading(true)
-        const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Students.json");
-        const data = await res.json();
-        setStudent(data)
-        setLoading(false)
-        console.log(data)
+        if (!sessionStorage.getItem('studentData')) setLoading(true);
+        try {
+            const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Students.json");
+            const data = await res.json();
+            setStudent(data);
+            sessionStorage.setItem('studentData', JSON.stringify(data));
+        } catch (error) {
+            console.error("Error fetching student:", error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
