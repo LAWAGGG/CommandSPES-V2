@@ -3,6 +3,8 @@ import { BASE_URL } from "../utils/utils";
 import { Link } from "react-router-dom";
 import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
+import "./Project.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Project() {
     const [project, setProject] = useState(() => {
@@ -34,61 +36,21 @@ export default function Project() {
         item.title.toLowerCase().includes(search.toLowerCase())
     )
 
-    useEffect(() => {
-        if (loading) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        if (entry.target.style.animationPlayState) {
-                            entry.target.style.animationPlayState = 'running';
-                        }
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            }
-        );
-
-        // Animasi header
-        const headerElements = document.querySelectorAll(
-            '.animate-pop, .animate-slide-up, .animate-slide-up-delay'
-        );
-
-        // Animasi cards
-        const cardElements = document.querySelectorAll('.animate-card');
-
-        // Animasi no results
-        const noResultsElement = document.querySelector('.animate-fade');
-
-        [...headerElements, ...cardElements, noResultsElement].forEach(el => {
-            if (el) {
-                el.style.opacity = 0;
-                observer.observe(el);
-            }
-        });
-
-        return () => {
-            [...headerElements, ...cardElements, noResultsElement].forEach(el => {
-                if (el) observer.unobserve(el);
-            });
-        };
-    }, [loading, filteredProject]);
-
     return (
         <>
             <NavBar></NavBar>
             <div className={`ProjectContent ${loading ? "loading" : ""}`}>
                 <div className="ProjectWrapper">
-                    <div className="projectHeader">
-                        <div className="headerContent fade-in">
+                    <motion.div 
+                        className="projectHeader"
+                        initial={{ opacity: 0, y: -30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <div className="headerContent">
                             <h1>Our Projects Gallery</h1>
                             <p>Explore the innovative work created by our talented students</p>
-                            <div className="searchBar slide-up-delay">
+                            <div className="searchBar">
                                 <input
                                     type="text"
                                     value={search}
@@ -100,41 +62,59 @@ export default function Project() {
                                 </svg>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="projects">
-                        {filteredProject.length > 0 ? (
-                            filteredProject.map((item, i) => (
-                                <Link key={i} to={`/project/${item.id}`} className="animate-card"
-                                    style={{ animationDelay: `${i * 0.1}s` }} >
-                                    <div className="ProjectCard">
-                                        <div className="ProjectImages">
-                                            <img src={item.image_url} alt={item.title} />
-                                            <div className="imageOverlay"></div>
-                                        </div>
-                                        <div className="ProjectDetail">
-                                            <h2>{item.title}</h2>
-                                            <div className="languages">
-                                                {item.language.split("\n").map((lang, i) => {
-                                                    const langClass = lang.toLowerCase().replace(/#/g, 's');
-                                                    return (
-                                                        <span key={i} className={`${langClass}`}>
-                                                            {lang}
-                                                        </span>
-                                                    )
-                                                })}
+                    <motion.div 
+                        className="projects"
+                        layout
+                    >
+                        <AnimatePresence mode="popLayout">
+                            {filteredProject.length > 0 ? (
+                                filteredProject.map((item, i) => (
+                                    <motion.div
+                                        key={item.id || i}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        transition={{ duration: 0.3 }}
+                                        whileHover={{ y: -10 }}
+                                    >
+                                        <Link to={`/project/${item.id}`} style={{ textDecoration: 'none' }}>
+                                            <div className="ProjectCard">
+                                                <div className="ProjectImages">
+                                                    <img src={item.image_url} alt={item.title} />
+                                                    <div className="imageOverlay"></div>
+                                                </div>
+                                                <div className="ProjectDetail">
+                                                    <h2>{item.title}</h2>
+                                                    <div className="languages">
+                                                        {item.language.split("\n").map((lang, i) => {
+                                                            const langClass = lang.toLowerCase().replace(/#/g, 's');
+                                                            return (
+                                                                <span key={i} className={`${langClass}`}>
+                                                                    {lang}
+                                                                </span>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))
-                        ) : (
-                            <div className="noResults">
-                                <h3>No projects found</h3>
-                                <p>Try a different search term</p>
-                            </div>
-                        )}
-                    </div>
+                                        </Link>
+                                    </motion.div>
+                                ))
+                            ) : (
+                                <motion.div 
+                                    className="noResults"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                >
+                                    <h3>No projects found</h3>
+                                    <p>Try a different search term</p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
                 </div>
             </div>
             <Footer></Footer>

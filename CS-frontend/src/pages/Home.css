@@ -1,0 +1,801 @@
+.Bg-tech {
+    background: linear-gradient(#000000e9, #174059f3),
+        url("/bg-tech.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.HomePage {
+    padding: 1.5rem 3rem;
+    height: 110vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Header {
+    padding: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text h1 {
+    font-size: 3.3rem;
+    font-weight: 900;
+    line-height: 110%;
+}
+
+.Logo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 8px solid #0a1e2a;
+    box-shadow: 0 10px 15px #030a0e;
+}
+
+.Logo img {
+    height: 100%;
+    width: 100%;
+}
+
+.JsonCard {
+    background-color: #0c2535;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.JsonCard:hover {
+    box-shadow: 0 4px 15px #071620;
+}
+
+svg {
+    transition: 0.3s;
+}
+
+svg:hover {
+    transform: scale(1.1);
+}
+
+.template {
+    width: 100%;
+    height: 3.5rem;
+    background-color: #030a0f;
+    display: flex;
+    align-items: center;
+}
+
+.body {
+    padding: 1rem;
+}
+
+.circles {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 0rem 2rem;
+}
+
+.StudentPage {
+    position: relative;
+    background-color: #174059;
+    padding: 0rem 0rem;
+    color: white;
+    overflow: hidden;
+}
+
+.vhFull {
+    height: 200dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.StudentWrapper {
+    background: linear-gradient(#0b202e, #0b202e);
+    background-size: cover;
+    background-position: center;
+    padding: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.memberTitle {
+    font-size: 3rem;
+}
+
+.students {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.studentCard {
+    display: flex;
+    background-color: #1f47649b;
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+    border-radius: 1.5rem;
+    align-items: center;
+    width: 550px;
+    gap: 1rem;
+    color: white;
+    border: 4px solid #102d40;
+    justify-content: start;
+    box-shadow: -8px 8px 8px #071620;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.studentCard:hover {
+    transform: scale(1.05);
+    background-color: #26577a;
+}
+
+.Profile {
+    width: 40%;
+    height: 12rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 4px solid #153b54;
+}
+
+.Profile img {
+    width: 100%;
+    height: 100%;
+}
+
+.position {
+    background: linear-gradient(#27719f, #184561);
+    border-radius: 1rem;
+    padding: 0.3rem 1rem;
+    transition: 0.3s;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 60%;
+}
+
+.name {
+    margin-bottom: 1rem;
+}
+
+.name h2 {
+    font-size: 1.8rem;
+}
+
+.member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    gap: 1rem;
+}
+
+.member a {
+    color: white;
+}
+
+.pos {
+    display: flex;
+    transition: 0.3s;
+}
+
+.hoverBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #26577a;
+    z-index: -1;
+    border-radius: 1.5rem;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+.studentCard:hover .hoverBackground {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.studentCard:not(:hover) .hoverBackground {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+.photos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.photos a {
+    color: white;
+}
+
+.images {
+    display: flex;
+    align-items: center;
+    padding: 0rem 0rem;
+    justify-content: space-around;
+}
+
+.images a {
+    color: white;
+}
+
+.GalleryPage {
+    background: linear-gradient(#0b202ee4, #009afa95),
+        url("/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 5rem 0rem;
+}
+
+.Galleries {
+    padding: 3rem 3rem;
+    height: 100dvh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.galleryCard {
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: 25rem;
+    height: 18rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    border: 5px solid #2b7aac;
+    transition: 0.3s;
+}
+
+.galleryCard:hover {
+    transform: translateY(-8px);
+}
+
+.galleryCard img {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Floating Card Animation */
+@keyframes floating-card {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(1deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.floating-card {
+    animation: floating-card 6s ease-in-out infinite;
+    transition: all 0.5s ease;
+}
+
+.floating-card:hover {
+    animation: floating-card 3s ease-in-out infinite;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(79, 195, 247, 0.3);
+}
+
+@keyframes orb-rotate {
+    0% {
+        transform: rotate(0deg) translateX(150px) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: rotate(360deg) translateX(150px) rotate(-360deg);
+        opacity: 0.7;
+    }
+}
+
+/* Class Details Section */
+.ClassDetails {
+    background-color: #0f2a3d;
+    color: white;
+    padding: 8rem 3rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
+}
+
+.classDescription {
+    background-color: #7d89fa19;
+    padding: 2rem;
+    border-radius: 1rem;
+    grid-column: span 5;
+}
+
+.classDescription h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.descriptionContent {
+    text-align: center;
+    line-height: 1.6;
+    display: grid;
+    gap: 1rem;
+}
+
+.funFacts {
+    background-color: #7d89fa19;
+    padding: 2rem;
+    border-radius: 1rem;
+    grid-column: span 12;
+}
+
+.funFacts h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.factsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    perspective: 1000px;
+}
+
+.factCard {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.factIcon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    transform: translateZ(30px);
+}
+
+.ClassDetails::before,
+.ClassDetails::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 80px;
+}
+
+.ClassDetails::before {
+    top: 0;
+    background: linear-gradient(to bottom, #174059, rgba(15, 42, 61, 0));
+}
+
+.ClassDetails::after {
+    bottom: 0;
+    background: linear-gradient(to top, #0b212e, rgba(15, 42, 61, 0));
+}
+
+.progressSection {
+    background-color: #7d89fa19;
+    padding: 2rem;
+    border-radius: 1rem;
+    color: white;
+    text-align: center;
+    grid-column: span 7;
+}
+
+.progressSection h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.progressBars {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.progressItem {
+    text-align: left;
+}
+
+.progressLabel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.progressBar {
+    width: 100%;
+    height: 14px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #4fc3f7, #7d89fa);
+    border-radius: 10px;
+    width: 0%;
+}
+
+/* Interactive Progress Bar Styles */
+.interactive-progress {
+    user-select: none;
+}
+
+.interactive-progress .progressPercentage {
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.interactive-progress .progressPercentage.hovered {
+    color: #4fc3f7;
+    transform: scale(1.1);
+}
+
+.interactive-progress .progressBar {
+    width: 100%;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    cursor: default;
+    transition: transform 0.2s ease;
+}
+
+.interactive-progress .progressBar.hovered {
+    cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+}
+
+.interactive-progress .progressFill {
+    height: 100%;
+    border-radius: 12px;
+    width: 0%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    background: linear-gradient(90deg, #4fc3f7, #7d89fa);
+}
+
+.interactive-progress .progressFill.hovered {
+    background: linear-gradient(90deg, #00e5ff, #3f51b5, #9c27b0);
+    box-shadow: 0 0 20px rgba(79, 195, 247, 0.6);
+}
+
+.interactive-progress .dragIndicator {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    right: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s ease;
+}
+
+.interactive-progress .dragIndicator.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Moving Border Animation */
+.moving-border-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.moving-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 2px;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.moving-border::before {
+    content: "";
+    position: absolute;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg,
+            transparent,
+            #4fc3f7,
+            #7d89fa,
+            #9c27b0,
+            transparent);
+    animation: rotate 4s linear infinite;
+    border-radius: inherit;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.classDescription,
+.progressSection,
+.funFacts {
+    position: relative;
+    overflow: hidden;
+}
+
+.classDescription::before,
+.progressSection::before,
+.funFacts::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: 1rem;
+    padding: 2px;
+    background: conic-gradient(from 0deg,
+            transparent,
+            #4fc3f7,
+            #7d89fa,
+            #9c27b0,
+            transparent);
+    background-size: 200% 200%;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotate 4s linear infinite;
+}
+
+.factCard-3d {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.21, 0.99);
+    transform-origin: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.factCard-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    border-radius: inherit;
+    transform: translateZ(20px);
+    pointer-events: none;
+}
+
+.factCard-3d h3 {
+    transform: translateZ(20px);
+}
+
+.factCard-3d p {
+    transform: translateZ(10px);
+}
+
+/* Media Queries for Home Page */
+@media (max-width: 992px) {
+    .galleryCard {
+        flex: 1 1 calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .HomePage {
+        padding: 1.5rem 1rem;
+        min-height: 100vh;
+        text-align: center;
+    }
+
+    .Header {
+        flex-direction: column;
+        gap: 2.5rem;
+        padding: 0.5rem;
+    }
+
+    .text h1 {
+        font-size: 2rem;
+    }
+
+    .Logo {
+        width: 200px;
+        height: 200px;
+        border-width: 6px;
+        margin: 0 auto;
+    }
+
+    .StudentWrapper {
+        padding: 3rem 1rem;
+    }
+
+    .memberTitle {
+        font-size: 2rem !important;
+    }
+
+    .member {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .detail {
+        width: 100%;
+        align-items: center;
+    }
+
+    .name h2 {
+        font-size: 1.5rem;
+    }
+
+    .GalleryPage {
+        padding: 2.5rem 0;
+        height: auto;
+    }
+
+    .Galleries {
+        padding: 1rem;
+        height: auto;
+    }
+
+    .images {
+        flex-direction: column;
+        gap: 1.8rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+    }
+
+    .images h1 {
+        font-size: 2.3rem;
+    }
+
+    .content {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .galleryCard {
+        width: 100%;
+        height: 250px;
+        flex: 1 1 100%;
+    }
+
+    .ClassDetails {
+        grid-template-columns: 1fr;
+    }
+
+    .classDescription,
+    .funFacts,
+    .progressSection {
+        grid-column: span 1;
+        padding: 1.5rem 1rem;
+    }
+
+    .factsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .factCard-3d {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .factCard-3d::before,
+    .factIcon,
+    .factCard-3d h3,
+    .factCard-3d p {
+        transform: none !important;
+    }
+
+    .progressSection h2 {
+        font-size: 1.6rem;
+    }
+
+    .progressBar {
+        height: 14px;
+    }
+
+    .Profile {
+        width: 80%;
+        height: 90%;
+    }
+
+    .studentCard {
+        width: 100%;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 480px) {
+    .progressSection {
+        padding: 1.2rem 0.8rem;
+    }
+
+    .progressLabel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+    }
+
+    .progressLabel span:last-child {
+        align-self: flex-end;
+    }
+}

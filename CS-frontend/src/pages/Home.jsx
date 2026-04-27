@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Gallery from "./Gallery";
 import "@animxyz/core";
 import Footer from "../assets/Footer";
+import "./Home.css";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [student, setStudent] = useState([]);
@@ -12,6 +14,29 @@ export default function Home() {
   const [isStudentLoading, setIsStudentLoading] = useState(true);
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Framer Motion Variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
+
+  const staggerContainer = {
+    initial: {},
+    whileInView: {
+      transition: {
+        staggerChildren: 0.1,
+      }
+    }
+  };
+
+  const itemFadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+  };
 
   useEffect(() => {
     // Deteksi perangkat mobile
@@ -56,7 +81,6 @@ export default function Home() {
     );
     const data = await res.json();
     setStudent(data);
-    console.log(data);
     setIsStudentLoading(false);
   }
 
@@ -173,12 +197,10 @@ export default function Home() {
 
     const cards = document.querySelectorAll(".factCard-3d");
     const container = document.querySelector(".factsGrid");
+    if (!container) return;
 
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
-      const containerRect = container.getBoundingClientRect();
-      const containerCenterX = containerRect.left + containerRect.width / 2;
-      const containerCenterY = containerRect.top + containerRect.height / 2;
 
       cards.forEach((card) => {
         const cardRect = card.getBoundingClientRect();
@@ -218,9 +240,12 @@ export default function Home() {
       {/* Header */}
       <div className="Bg-tech">
         <div className="HomePage">
-          <div
+          <motion.div
             className="JsonCard floating-card"
             style={{ position: "relative", overflow: "hidden" }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
           >
             {/* Floating Light Orb Background */}
             <div
@@ -274,34 +299,53 @@ export default function Home() {
             <div className="body" style={{ position: "relative", zIndex: 1 }}>
               <div className="Header" xyz="fade stagger-1 up-3 ease-out-back">
                 <div className="text">
-                  <h1 className="h1">
+                  <motion.h1 
+                    className="h1"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                  >
                     Welcome Tooo <br />
                     Command SPES!
-                  </h1>
-                  <p>Software Programming And Engineering Specialist 🤩</p>
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  >
+                    Software Programming And Engineering Specialist 🤩
+                  </motion.p>
                 </div>
-                <div className="SpesLogo">
+                <motion.div 
+                  className="SpesLogo"
+                  initial={{ opacity: 0, x: 50, rotate: 10 }}
+                  animate={{ opacity: 1, x: 0, rotate: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
                   <div className="Logo">
                     <img src="/pp[1]-2.png" alt="" />
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Class Details Section */}
       <div className="ClassDetails">
-        <section className="moving-border-container classDescription">
+        <motion.section 
+          className="moving-border-container classDescription"
+          {...fadeInUp}
+        >
           <div className="moving-border"></div>
           <div className="descriptionContainer">
-            <h2>Apa Itu Command SPES?</h2>
+            <h2>Siapa Command SPES?</h2>
             <div className="descriptionContent">
               <p>
                 SPES (Software Programming and Engineering Specialist) adalah
                 salah satu angkatan ke 58 dari jurusan RPL (Rekayasa perangkat
-                lunak) yang fokus pada pengembangan keterampilan pemrograman dan
+                lunak) yang ada di SMKN 10 Jakarta, fokus pada pengembangan keterampilan pemrograman dan
                 rekayasa perangkat lunak tingkat lanjut.
               </p>
               <p>
@@ -310,11 +354,13 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section
+        <motion.section
           className="moving-border-container progressSection interactive-progress"
           ref={progressRef}
+          {...fadeInUp}
+          transition={{ ...fadeInUp.transition, delay: 0.2 }}
         >
           <div className="moving-border"></div>
           <h2>Progress Pembelajaran Kami 📊</h2>
@@ -372,12 +418,21 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <section className="moving-border-container funFacts">
+        <motion.section 
+          className="moving-border-container funFacts"
+          {...fadeInUp}
+        >
           <div className="moving-border"></div>
           <h2>Fun Facts!</h2>
-          <div className="factsGrid">
+          <motion.div 
+            className="factsGrid"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {[
               {
                 icon: "👨‍💻",
@@ -400,27 +455,53 @@ export default function Home() {
                 desc: "Total waktu belajar intensif",
               },
             ].map((fact, index) => (
-              <div key={index} className="factCard-3d">
+              <motion.div 
+                key={index} 
+                className="factCard-3d"
+                variants={itemFadeIn}
+              >
                 <div className="factIcon">{fact.icon}</div>
                 <h3>{fact.title}</h3>
                 <p>{fact.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
       </div>
 
       <div className="StudentPage">
-        <div className={`StudentWrapper ${isStudentLoading ? "vhFull" : ""}`}>
-          <div className="member">
+        <motion.div 
+          className={`StudentWrapper ${isStudentLoading ? "vhFull" : ""}`}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div 
+            className="member"
+            variants={fadeInUp}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+          >
             <h1 className="memberTitle">Our Members 🫂!</h1>
             <Link to="/students">View All </Link>
-          </div>
-          <div className="students">
+          </motion.div>
+          <motion.div 
+            className="students"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {student
               .filter((item) => item.position !== "Member")
               .map((item, i) => (
-                <div key={i} className="studentCard">
+                <motion.div 
+                  key={i} 
+                  className="studentCard"
+                  variants={itemFadeIn}
+                >
                   <div className="Profile">
                     <img src={item.profile_url} alt="Profile" />
                   </div>
@@ -432,31 +513,48 @@ export default function Home() {
                       <p className="position">{item.position}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       <div className="GalleryPage">
-        <div className="Galleries">
+        <motion.div 
+          className="Galleries"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="images">
             <h1 className="memberTitle">Recent Activities ✨</h1>
             <Link to="/galleries">View All</Link>
           </div>
-          <div className="content">
+          <motion.div 
+            className="content"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+          >
             {gallery
               .sort(() => Math.random() - 0.2)
               .slice(0, 6)
               .map((item, i) => {
                 return (
-                  <div className="galleryCard" key={i}>
+                  <motion.div 
+                    className="galleryCard" 
+                    key={i}
+                    variants={itemFadeIn}
+                    whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                  >
                     <img src={item.image_url_1} alt="Images" />
-                  </div>
+                  </motion.div>
                 );
               })}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       <Footer></Footer>
     </>

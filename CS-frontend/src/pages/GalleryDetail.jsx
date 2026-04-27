@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { BASE_URL } from "../utils/utils"
-import "/src/gallery.css"
+import "./Gallery.css"
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function GalleryDetail() {
     const [gallery, setgallery] = useState({})
@@ -175,16 +176,40 @@ export default function GalleryDetail() {
     }, [images, isFullscreen, isTransitioning])
 
     return (
-        <div className="GalleryContentBg">
+        <motion.div 
+            className="GalleryContentBg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <div className="GalleryDetailContent">
-                <Link to="/galleries">&larr; Back</Link>
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Link to="/galleries" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'white', textDecoration: 'none', marginBottom: '1rem' }}>
+                        &larr; Back to Gallery
+                    </Link>
+                </motion.div>
+                
                 <div className="DetailGallery">
-                    <div className="detailsImage">
+                    <motion.div 
+                        className="detailsImage"
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                    >
                         <h1>{title}</h1>
                         <p>{desc}</p>
-                    </div>
+                    </motion.div>
 
-                    <div className="ImagesList">
+                    <motion.div 
+                        className="ImagesList"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.8 }}
+                    >
                         <div className="carousel-wrapper" style={{ cursor: 'pointer' }}>
                             {images.length > 0 && (
                                 <>
@@ -238,206 +263,112 @@ export default function GalleryDetail() {
                                 </>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
             {/* Fullscreen Modal */}
-            {isFullscreen && (
-                <div 
-                    style={{
-                        position: 'fixed',
-                        top: 0, left: 0, right: 0, bottom: 0,
-                        backgroundColor: 'rgba(0,0,0,0.95)',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: 9999,
-                        flexDirection: 'column',
-                        overflow: 'hidden',
-                        touchAction: 'none' // Prevent pull-to-refresh on mobile
-                    }}
-                >
-                    {/* Close Button */}
-                    <button 
-                        onClick={closeFullscreen}
-                        style={{ 
-                            position: 'absolute', 
-                            top: '20px', 
-                            right: '30px', 
-                            background: 'rgba(255,255,255,0.2)', 
-                            color: 'white', 
-                            border: 'none', 
-                            fontSize: '2rem', 
-                            cursor: 'pointer',
-                            zIndex: 10000,
-                            width: '50px',
-                            height: '50px',
-                            borderRadius: '50%',
+            <AnimatePresence>
+                {isFullscreen && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{
+                            position: 'fixed',
+                            top: 0, left: 0, right: 0, bottom: 0,
+                            backgroundColor: 'rgba(0,0,0,0.95)',
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            transition: 'background 0.3s'
-                        }}
-                        onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'}
-                        onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-                    >
-                        &times;
-                    </button>
-                    
-                    {/* Zoom Controls */}
-                    <div style={{ 
-                        position: 'absolute', 
-                        bottom: '40px', 
-                        display: 'flex', 
-                        gap: '20px', 
-                        zIndex: 10000,
-                        background: 'rgba(0,0,0,0.7)',
-                        padding: '10px 20px',
-                        borderRadius: '30px',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
-                    }}>
-                        <button 
-                            onClick={zoomOut} 
-                            style={{ 
-                                background: 'white', color: 'black', border: 'none', borderRadius: '50%', 
-                                width: '45px', height: '45px', fontSize: '1.8rem', cursor: 'pointer',
-                                display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                transition: 'transform 0.2s',
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            -
-                        </button>
-                        <span style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: '1.2rem', minWidth: '60px', justifyContent: 'center' }}>
-                            {Math.round(zoomScale * 100)}%
-                        </span>
-                        <button 
-                            onClick={zoomIn} 
-                            style={{ 
-                                background: 'white', color: 'black', border: 'none', borderRadius: '50%', 
-                                width: '45px', height: '45px', fontSize: '1.5rem', cursor: 'pointer',
-                                display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                transition: 'transform 0.2s',
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            +
-                        </button>
-                    </div>
-
-                    {/* Navigation Buttons for Fullscreen */}
-                    {images.length > 1 && zoomScale === 1 && (
-                        <>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                                style={{
-                                    position: 'absolute',
-                                    left: '20px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'rgba(0,0,0,0.5)',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: '60px',
-                                    height: '60px',
-                                    fontSize: '2rem',
-                                    cursor: 'pointer',
-                                    zIndex: 10000,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center'
-                                }}
-                            >
-                                &#10094;
-                            </button>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                                style={{
-                                    position: 'absolute',
-                                    right: '20px',
-                                    top: '50%',
-                                    transform: 'translateY(-50%)',
-                                    background: 'rgba(0,0,0,0.5)',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: '60px',
-                                    height: '60px',
-                                    fontSize: '2rem',
-                                    cursor: 'pointer',
-                                    zIndex: 10000,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center'
-                                }}
-                            >
-                                &#10095;
-                            </button>
-                        </>
-                    )}
-
-                    {/* Image Container with Swipe and Pan */}
-                    <div 
-                        onPointerDown={handlePointerDown}
-                        onPointerMove={handlePointerMove}
-                        onPointerUp={handlePointerUp}
-                        onPointerCancel={handlePointerUp}
-                        onWheel={handleWheel}
-                        style={{ 
-                            width: '100%', 
-                            height: '100%', 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            alignItems: 'center',
-                            cursor: zoomScale > 1 ? (isDragging ? 'grabbing' : 'grab') : (isDragging ? 'grabbing' : 'auto')
+                            zIndex: 9999,
+                            flexDirection: 'column',
+                            overflow: 'hidden',
+                            touchAction: 'none'
                         }}
                     >
-                        <div
-                            style={{
+                        {/* Close Button */}
+                        <motion.button 
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            onClick={closeFullscreen}
+                            style={{ 
+                                position: 'absolute', 
+                                top: '20px', 
+                                right: '30px', 
+                                background: 'rgba(255,255,255,0.2)', 
+                                color: 'white', 
+                                border: 'none', 
+                                fontSize: '2rem', 
+                                cursor: 'pointer',
+                                zIndex: 10000,
+                                width: '50px',
+                                height: '50px',
+                                borderRadius: '50%',
                                 display: 'flex',
-                                transition: zoomScale === 1 ? 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
-                                transform: `translateX(-${currentSlide * 100}%)`,
-                                width: '100%',
-                                height: '100%'
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                transition: 'background 0.3s'
                             }}
                         >
-                            {images.map((image, index) => (
-                                <div 
-                                    key={index} 
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        flexShrink: 0,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        padding: '20px'
-                                    }}
-                                >
-                                    <img 
-                                        src={image} 
-                                        alt={`Fullscreen ${index + 1}`} 
-                                        draggable="false"
-                                        style={{ 
-                                            transform: index === currentSlide ? `translate(${panX}px, ${panY}px) scale(${zoomScale})` : 'scale(1)', 
-                                            transition: zoomScale === 1 && !isDragging ? 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
-                                            transformOrigin: 'center center',
-                                            maxWidth: '100%', 
-                                            maxHeight: '100%', 
-                                            objectFit: 'contain',
-                                            borderRadius: '8px',
-                                            userSelect: 'none',
-                                            WebkitUserSelect: 'none'
-                                        }} 
-                                    />
-                                </div>
-                            ))}
+                            &times;
+                        </motion.button>
+                        
+                        {/* Zoom Controls */}
+                        <motion.div 
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            style={{ 
+                                position: 'absolute', 
+                                bottom: '40px', 
+                                display: 'flex', 
+                                gap: '20px', 
+                                zIndex: 10000,
+                                background: 'rgba(0,0,0,0.7)',
+                                padding: '10px 20px',
+                                borderRadius: '30px',
+                            }}
+                        >
+                            <button onClick={zoomOut} style={{ background: 'white', border: 'none', borderRadius: '50%', width: '45px', height: '45px', fontSize: '1.8rem', cursor: 'pointer' }}>-</button>
+                            <span style={{ color: 'white', display: 'flex', alignItems: 'center', fontSize: '1.2rem', minWidth: '60px', justifyContent: 'center' }}>{Math.round(zoomScale * 100)}%</span>
+                            <button onClick={zoomIn} style={{ background: 'white', border: 'none', borderRadius: '50%', width: '45px', height: '45px', fontSize: '1.5rem', cursor: 'pointer' }}>+</button>
+                        </motion.div>
+
+                        {/* Navigation Buttons for Fullscreen */}
+                        {images.length > 1 && zoomScale === 1 && (
+                            <>
+                                <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="carousel-btn left" style={{ position: 'fixed', left: '20px', width: '60px', height: '60px', fontSize: '2rem' }}>&#10094;</button>
+                                <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="carousel-btn right" style={{ position: 'fixed', right: '20px', width: '60px', height: '60px', fontSize: '2rem' }}>&#10095;</button>
+                            </>
+                        )}
+
+                        {/* Image Container */}
+                        <div 
+                            onPointerDown={handlePointerDown}
+                            onPointerMove={handlePointerMove}
+                            onPointerUp={handlePointerUp}
+                            onPointerCancel={handlePointerUp}
+                            onWheel={handleWheel}
+                            style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        >
+                            <div style={{ display: 'flex', transition: zoomScale === 1 ? 'transform 0.4s' : 'none', transform: `translateX(-${currentSlide * 100}%)`, width: '100%', height: '100%' }}>
+                                {images.map((image, index) => (
+                                    <div key={index} style={{ width: '100%', height: '100%', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+                                        <motion.img 
+                                            src={image} 
+                                            alt={`Fullscreen ${index + 1}`} 
+                                            style={{ 
+                                                transform: index === currentSlide ? `translate(${panX}px, ${panY}px) scale(${zoomScale})` : 'scale(1)', 
+                                                maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'
+                                            }} 
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            )}
-        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     )
-}
+}

@@ -3,6 +3,8 @@ import { BASE_URL } from "../utils/utils";
 import { Link } from "react-router-dom";
 import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
+import "./Student.css";
+import { motion } from "framer-motion";
 
 export default function Student() {
     const [student, setStudent] = useState(() => {
@@ -10,6 +12,20 @@ export default function Student() {
         return cached ? JSON.parse(cached) : [];
     });
     const [loading, setLoading] = useState(() => !sessionStorage.getItem('studentData'))
+
+    // Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
 
     async function fetchStudent() {
         if (!sessionStorage.getItem('studentData')) setLoading(true);
@@ -29,72 +45,52 @@ export default function Student() {
         fetchStudent()
     }, [])
 
-    useEffect(() => {
-        if (loading) return;
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        if (entry.target.style.animationPlayState) {
-                            entry.target.style.animationPlayState = 'running';
-                        }
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            }
-        );
-
-        const animatedElements = document.querySelectorAll(
-            '.animate-pop, .animate-slide-up, .animate-card'
-        );
-
-        animatedElements.forEach(el => {
-            el.style.opacity = 0;
-            observer.observe(el);
-        });
-
-        return () => {
-            animatedElements.forEach(el => observer.unobserve(el));
-        };
-    }, [loading, student]);
-
     return (
         <>
             <NavBar></NavBar>
             <div className={`StudentContent ${loading ? "loading" : ""}`}>
                 <div className="StudentWrappers">
-                    <div className="Explain">
-                        <h1 className="animate-pop">Our Awesome Members!</h1>
-                        <p className="animate-slide-up">Meet the talented individuals of RPL58 class! Cool looks, brilliant minds 🥶✨</p>
-                    </div>
-                    <div className="student">
+                    <motion.div 
+                        className="Explain"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <h1>Our Awesome Members!</h1>
+                        <p>Meet the talented individuals of RPL58 class! Cool looks, brilliant minds 🥶✨</p>
+                    </motion.div>
+                    <motion.div 
+                        className="student"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate={loading ? "hidden" : "visible"}
+                    >
                         {student.map((item, i) => (
-                            <Link
+                            <motion.div
                                 key={i}
-                                to={`/students/${item.id}`}
-                                className="animate-card"
-                                style={{ animationDelay: `${i * 0.1}s` }}
+                                variants={cardVariants}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                <div className="StudentCard">
-                                    <div className="StudentProfile">
-                                        <img src={item.profile_url} alt={item.name} />
-                                        <div className="profile-overlay"></div>
-                                    </div>
-                                    <div className="StudentDetail">
-                                        <div className="names">
-                                            <p>{item.name}</p>
-                                            <p className="position-tag">{item.skill}</p>
+                                <Link
+                                    to={`/students/${item.id}`}
+                                >
+                                    <div className="StudentCard">
+                                        <div className="StudentProfile">
+                                            <img src={item.profile_url} alt={item.name} />
+                                            <div className="profile-overlay"></div>
+                                        </div>
+                                        <div className="StudentDetail">
+                                            <div className="names">
+                                                <p>{item.name}</p>
+                                                <p className="position-tag">{item.skill}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
             <Footer></Footer>

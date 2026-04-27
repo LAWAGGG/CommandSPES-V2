@@ -1,0 +1,638 @@
+.ProjectContent {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(23, 64, 89, 0.9)),
+        url("/bg-2.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 2rem 0;
+    color: white;
+}
+
+.ProjectWrapper {
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 2rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* Header Section */
+.projectHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.projectHeader h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #4fc3f7, #7d89fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.projectHeader p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.searchBar {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.searchBar input {
+    width: 100%;
+    padding: 0.8rem 1.5rem 0.8rem 3rem;
+    border-radius: 2rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.searchBar input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.5);
+}
+
+.searchBar input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: rgba(255, 255, 255, 0.7);
+}
+
+/* Projects Grid */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.ProjectCard {
+    display: flex;
+    background-color: #2d6d9b50;
+    backdrop-filter: blur(3px);
+    padding: .5rem .8rem;
+    border-radius: .5rem;
+    width: 28rem;
+    gap: .5rem;
+    color: white;
+    box-shadow: -8px 8px 8px #07162096;
+    transition: 0.3s;
+    flex-direction: column;
+}
+
+.ProjectCard:hover {
+    transform: scale(1.03);
+    background-color: #26577a;
+}
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.projects a {
+    text-decoration: none;
+}
+
+.ProjectProfile {
+    width: 100%;
+    height: 13rem;
+    overflow: hidden;
+    border-radius: .5rem;
+    border: 4px solid #102d40;
+    background-color: #1d5679;
+}
+
+.ProjectProfile img {
+    width: 100%;
+    height: 100%;
+}
+
+.projectNav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    padding: 0rem 3rem;
+}
+
+.ProjectDetail {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.languages {
+    display: flex;
+    gap: .5rem;
+}
+
+.html {
+    background: linear-gradient(rgb(255, 179, 0), rgb(255, 115, 0));
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.cs {
+    background-color: purple;
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.reactjs {
+    background: linear-gradient(rgb(0, 140, 201), rgb(0, 64, 142));
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.laravel {
+    background: linear-gradient(red, orange);
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.css {
+    background-color: rgb(0, 128, 255);
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.js {
+    background: yellow;
+    color: black;
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.desktop {
+    background: linear-gradient(rgb(15, 15, 15), rgb(71, 71, 71));
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.unity {
+    background: linear-gradient(rgb(60, 60, 60), rgb(120, 120, 120));
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.bootstrap {
+    background: linear-gradient(rgb(124, 124, 255), blue);
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+.php {
+    background: linear-gradient(rgb(255, 168, 255), rgb(218, 70, 218));
+    padding: 0rem .5rem;
+    border-radius: .3rem;
+}
+
+/* No Results */
+.noResults {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    opacity: 0.7;
+}
+
+.noResults h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Loading State */
+.ProjectContent.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading .ProjectWrapper {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* ANIMASI */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes cardEntry {
+    from {
+        transform: translateY(30px) rotateX(15deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) rotateX(0);
+        opacity: 1;
+    }
+}
+
+/* Class Animasi */
+.animate-pop {
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+}
+
+.animate-slide-up-delay {
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
+}
+
+.animate-card {
+    animation: cardEntry 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-fade {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Efek Hover Tambahan */
+.ProjectCard:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .ProjectWrapper {
+        padding: 2rem 1.5rem;
+    }
+
+    .projects {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .projectHeader h1 {
+        font-size: 2.2rem;
+    }
+
+    .projectHeader p {
+        font-size: 1rem;
+    }
+
+    .ProjectWrapper {
+        padding: 5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projectHeader h1 {
+        font-size: 1.8rem;
+    }
+
+    .ProjectImage {
+        height: 180px;
+    }
+
+    .ProjectInfo {
+        padding: 1rem;
+    }
+
+    .ProjectInfo h2 {
+        font-size: 1.3rem;
+    }
+
+    .searchBar input {
+        padding: 0.7rem 1.2rem 0.7rem 2.5rem;
+    }
+
+    .searchIcon {
+        left: 0.8rem;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .ProjectCard {
+        width: 330px;
+        /* semua kartu maksimal 360px */
+    }
+
+    .projects {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.ProjectPage {
+    color: white;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ProjectImage {
+    width: 100%;
+    height: 35dvh;
+    background: linear-gradient(to bottom, #051128, #0a1a3a);
+    position: relative;
+    overflow: hidden;
+}
+
+.ProjectImage img {
+    width: 100%;
+    height: 300%;
+
+}
+
+.ProjectImages {
+    width: 100%;
+    height: 35dvh;
+    background: linear-gradient(to bottom, #051128, #0a1a3a);
+    position: relative;
+    overflow: hidden;
+}
+
+.ProjectImages img {
+    width: 100%;
+    height: 100%;
+
+}
+
+
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ProjectContents {
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+
+.ProjectContents::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 39.5dvh;
+    width: 100%;
+    height: 25.5dvh;
+    z-index: -1;
+    background: url("/element-1.png");
+    background-size: cover;
+    background-position: 100%;
+    background-repeat: no-repeat;
+
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+
+
+.ProjectContents::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -20%;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to top, #051128, transparent);
+}
+
+.DetailProject {
+    width: 100dvh;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    align-items: start;
+}
+
+.DetailProject h1 {
+    grid-column: 1 / -1;
+}
+
+.DetailProject a {
+    color: blue;
+}
+
+.languages {
+    display: flex;
+    gap: 0.5rem;
+    grid-column: 2;
+    flex-wrap: wrap;
+}
+
+.lang {
+    background-color: #0a93c3;
+    padding: 0.1rem 1rem;
+    border-radius: 1rem;
+    color: white;
+}
+
+/* Mobile Styles Only (tambahkan di bagian bawah file CSS) */
+@media (max-width: 768px) {
+    .ProjectPage {
+        height: 100%;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ProjectImage {
+        height: 30dvh;
+        position: relative;
+    }
+
+    .back {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 0.4rem 0.8rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        color: white;
+        text-decoration: none;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .ProjectImage img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-bottom: 2px solid #1e2a47;
+    }
+
+    .ProjectContents {
+        padding: 1.5rem 1rem;
+        background: linear-gradient(to bottom, #051128, #0a1a3a);
+    }
+
+    .ProjectContents::before {
+        display: none;
+    }
+
+    .ProjectContents::after{
+        z-index: 1000;
+        top: 70%;
+        width: 100%;
+    }
+
+    .DetailProject {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.01rem;
+    }
+
+    .DetailProject h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #4fc3f7;
+        text-align: center;
+    }
+
+    .DetailProject p {
+        font-size: 0.95rem;
+        color: #e0e0e0;
+        line-height: 1.4;
+    }
+
+    .DetailProject>p:nth-child(odd) {
+        color: #aec2dc;
+        margin-bottom: 1.5rem;
+    }
+
+    .DetailProject>p:nth-child(even) {
+        font-weight: 600;
+        margin-bottom: .2rem;
+    }
+
+    .languages {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .lang {
+        background: linear-gradient(135deg, #0a93c3, #0d6efd);
+        padding: 0.3rem 0.9rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .DetailProject a {
+        display: inline-block;
+        padding: 0.45rem 0.9rem;
+        background: #333;
+        color: white;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+    }
+
+    .description-text {
+        margin-top: 0.5rem;
+        font-style: italic;
+        color: #cfd8dc;
+    }
+}
