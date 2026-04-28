@@ -134,7 +134,7 @@ export default function Gallery() {
                         <div className="skeleton-image"></div>
                       </div>
                     ))
-                : gallery.map((item, i) => (
+                : gallery.slice().reverse().map((item, i) => (
                     <Link
                       to={`/gallery/${item.id}`}
                       key={i}
