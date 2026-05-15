@@ -51,7 +51,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="bottom">
-                    <p>&copy;2025 Command Spes. All rights reserved.</p>
+                    <p>&copy;{new Date().getFullYear()} Command Spes. All rights reserved.</p>
                 </div>
             </div>
         </>

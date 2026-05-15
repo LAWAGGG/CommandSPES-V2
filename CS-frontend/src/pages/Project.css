@@ -129,9 +129,15 @@
     background-color: #1d5679;
 }
 
+img{
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
 .ProjectProfile img {
     width: 100%;
     height: 100%;
+    -webkit-user-drag: none;
 }
 
 .projectNav {
@@ -159,26 +165,26 @@
     width: 1.5rem;
     height: 1.5rem;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
 
 .lang-logo:hover {
     transform: translateY(-3px) scale(1.1);
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 }
 
 .lang-logo-detail {
     width: 2.2rem;
     height: 2.2rem;
     object-fit: contain;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
     transition: all 0.3s ease;
 }
 
 .lang-logo-detail:hover {
     transform: scale(1.15) rotate(5deg);
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
 }
 
 /* No Results */
@@ -386,6 +392,7 @@
 .ProjectImage img {
     width: 100%;
     height: 300%;
+    -webkit-user-drag: none;
 
 }
 
@@ -400,6 +407,7 @@
 .ProjectImages img {
     width: 100%;
     height: 100%;
+    -webkit-user-drag: none;
 
 }
 
@@ -514,6 +522,7 @@
         height: 100%;
         object-fit: cover;
         border-bottom: 2px solid #1e2a47;
+        -webkit-user-drag: none;
     }
 
     .ProjectContents {
@@ -525,7 +534,7 @@
         display: none;
     }
 
-    .ProjectContents::after{
+    .ProjectContents::after {
         z-index: 1000;
         top: 70%;
         width: 100%;

@@ -222,6 +222,7 @@ export default function GalleryDetail() {
                                             <div key={index} className="carousel-slide">
                                                 <img
                                                     src={image}
+                                                    draggable="false"
                                                     alt={`Image ${index + 1}`}
                                                     className="loaded"
                                                     onLoad={(e) => e.target.classList.add('loaded')}
@@ -337,8 +338,8 @@ export default function GalleryDetail() {
                         {/* Navigation Buttons for Fullscreen */}
                         {images.length > 1 && zoomScale === 1 && (
                             <>
-                                <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="carousel-btn left" style={{ position: 'fixed', left: '20px', width: '60px', height: '60px', fontSize: '2rem' }}>&#10094;</button>
-                                <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="carousel-btn right" style={{ position: 'fixed', right: '20px', width: '60px', height: '60px', fontSize: '2rem' }}>&#10095;</button>
+                                <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="carousel-btn left" style={{ position: 'fixed', left: '20px', width: '60px', fontSize: '2rem' }}>&#10094;</button>
+                                <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="carousel-btn right" style={{ position: 'fixed', right: '20px', width: '60px', fontSize: '2rem' }}>&#10095;</button>
                             </>
                         )}
 
@@ -356,6 +357,7 @@ export default function GalleryDetail() {
                                     <div key={index} style={{ width: '100%', height: '100%', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
                                         <motion.img 
                                             src={image} 
+                                            draggable="false"
                                             alt={`Fullscreen ${index + 1}`} 
                                             style={{ 
                                                 transform: index === currentSlide ? `translate(${panX}px, ${panY}px) scale(${zoomScale})` : 'scale(1)', 

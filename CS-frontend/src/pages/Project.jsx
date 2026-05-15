@@ -70,7 +70,7 @@ export default function Project() {
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredProject.length > 0 ? (
-                                filteredProject.map((item, i) => (
+                                filteredProject.slice().reverse().map((item, i) => (
                                     <motion.div
                                         key={item.id || i}
                                         layout
@@ -83,7 +83,7 @@ export default function Project() {
                                         <Link to={`/project/${item.id}`} style={{ textDecoration: 'none' }}>
                                             <div className="ProjectCard">
                                                 <div className="ProjectImages">
-                                                    <img src={item.image_url} alt={item.title} />
+                                                    <img src={item.image_url} alt={item.title} draggable="false" />
                                                     <div className="imageOverlay"></div>
                                                 </div>
                                                 <div className="ProjectDetail">

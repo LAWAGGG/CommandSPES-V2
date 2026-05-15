@@ -12,6 +12,11 @@
     transition: 0.3s;
 }
 
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
 .carouselTitle {
     font-family: Cedarville Cursive;
 }
@@ -257,7 +262,8 @@
 .carousel-wrapper {
     position: relative;
     width: 100%;
-    height: 400px; /* Mobile height */
+    height: 400px;
+    /* Mobile height */
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -266,10 +272,14 @@
 /* Desktop - landscape orientation dengan aspect ratio yang lebih baik */
 @media (min-width: 769px) {
     .carousel-wrapper {
-        height: 450px; /* Sedikit lebih rendah untuk landscape */
-        max-width: 900px; /* Lebih lebar untuk landscape */
-        margin: 0 auto; /* Center the carousel */
-        aspect-ratio: 16/9; /* Force landscape aspect ratio */
+        height: 450px;
+        /* Sedikit lebih rendah untuk landscape */
+        max-width: 900px;
+        /* Lebih lebar untuk landscape */
+        margin: 0 auto;
+        /* Center the carousel */
+        aspect-ratio: 16/9;
+        /* Force landscape aspect ratio */
     }
 }
 
@@ -298,15 +308,18 @@
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Semua device gunakan cover untuk full image */
+    object-fit: cover;
+    /* Semua device gunakan cover untuk full image */
     display: block;
 }
 
 /* Desktop - tetap full image dengan smart cropping */
 @media (min-width: 769px) {
     .carousel-slide img {
-        object-fit: cover; /* Cover untuk mengisi penuh tanpa background hitam */
-        object-position: center; /* Crop dari center untuk hasil terbaik */
+        object-fit: cover;
+        /* Cover untuk mengisi penuh tanpa background hitam */
+        object-position: center;
+        /* Crop dari center untuk hasil terbaik */
     }
 }
 
@@ -425,22 +438,23 @@
 /* Media Queries untuk Responsiveness */
 @media (max-width: 480px) {
     .carousel-wrapper {
-        height: 300px; /* Smaller height for small mobile */
+        height: 300px;
+        /* Smaller height for small mobile */
     }
-    
+
     .carousel-btn {
         font-size: 1.2rem;
         padding: 0.5rem 0.8rem;
     }
-    
+
     .carousel-btn.left {
         left: 8px;
     }
-    
+
     .carousel-btn.right {
         right: 8px;
     }
-    
+
     .indicator-dot {
         width: 8px;
         height: 8px;
@@ -452,11 +466,11 @@
         font-size: 1.5rem;
         padding: 0.6rem 1rem;
     }
-    
+
     .carousel-btn.left {
         left: 10px;
     }
-    
+
     .carousel-btn.right {
         right: 10px;
     }
@@ -469,24 +483,24 @@
         padding: 1rem 1.5rem;
         border-radius: 0.75rem;
     }
-    
+
     .carousel-btn.left {
         left: 20px;
     }
-    
+
     .carousel-btn.right {
         right: 20px;
     }
-    
+
     .carousel-indicators {
         bottom: 25px;
     }
-    
+
     .indicator-dot {
         width: 14px;
         height: 14px;
     }
-    
+
     .indicator-dot.active {
         transform: scale(1.3);
     }
