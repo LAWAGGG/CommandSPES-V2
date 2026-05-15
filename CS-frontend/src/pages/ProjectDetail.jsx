@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { data, Link, useParams } from "react-router-dom"
-import { BASE_URL } from "../utils/utils"
+import { BASE_URL, getLanguageLogo } from "../utils/utils"
 import "./Project.css";
 import { motion } from "framer-motion";
 
@@ -64,15 +64,24 @@ export default function ProjectDetail() {
 
                     <p>Language:</p>
                     <div className="languages">
-                        {project.language?.split("\n").map((item, i) => (
-                            <motion.span 
-                                key={i} 
-                                className="lang"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.7 + (i * 0.1) }}
-                            >{item}</motion.span>
-                        ))}
+                        {project.language?.split("\n").map((item, i) => {
+                            const logoUrl = getLanguageLogo(item);
+                            if (logoUrl) {
+                                return (
+                                    <motion.img 
+                                        key={i} 
+                                        src={logoUrl} 
+                                        alt={item} 
+                                        className="lang-logo-detail" 
+                                        title={item}
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.7 + (i * 0.1) }}
+                                    />
+                                )
+                            }
+                            return null;
+                        })}
                     </div>
 
                     <p>Description :</p>

@@ -150,68 +150,35 @@
 
 .languages {
     display: flex;
-    gap: .5rem;
+    gap: .8rem;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-.html {
-    background: linear-gradient(rgb(255, 179, 0), rgb(255, 115, 0));
-    padding: 0rem .5rem;
-    border-radius: .3rem;
+.lang-logo {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: all 0.3s ease;
 }
 
-.cs {
-    background-color: purple;
-    padding: 0rem .5rem;
-    border-radius: .3rem;
+.lang-logo:hover {
+    transform: translateY(-3px) scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
 }
 
-.reactjs {
-    background: linear-gradient(rgb(0, 140, 201), rgb(0, 64, 142));
-    padding: 0rem .5rem;
-    border-radius: .3rem;
+.lang-logo-detail {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    transition: all 0.3s ease;
 }
 
-.laravel {
-    background: linear-gradient(red, orange);
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.css {
-    background-color: rgb(0, 128, 255);
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.js {
-    background: yellow;
-    color: black;
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.desktop {
-    background: linear-gradient(rgb(15, 15, 15), rgb(71, 71, 71));
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.unity {
-    background: linear-gradient(rgb(60, 60, 60), rgb(120, 120, 120));
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.bootstrap {
-    background: linear-gradient(rgb(124, 124, 255), blue);
-    padding: 0rem .5rem;
-    border-radius: .3rem;
-}
-
-.php {
-    background: linear-gradient(rgb(255, 168, 255), rgb(218, 70, 218));
-    padding: 0rem .5rem;
-    border-radius: .3rem;
+.lang-logo-detail:hover {
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
 }
 
 /* No Results */
@@ -508,18 +475,8 @@
     color: blue;
 }
 
-.languages {
-    display: flex;
-    gap: 0.5rem;
+.DetailProject .languages {
     grid-column: 2;
-    flex-wrap: wrap;
-}
-
-.lang {
-    background-color: #0a93c3;
-    padding: 0.1rem 1rem;
-    border-radius: 1rem;
-    color: white;
 }
 
 /* Mobile Styles Only (tambahkan di bagian bawah file CSS) */
@@ -607,16 +564,8 @@
     .languages {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4rem;
+        gap: 0.6rem;
         margin-bottom: 1.5rem;
-    }
-
-    .lang {
-        background: linear-gradient(135deg, #0a93c3, #0d6efd);
-        padding: 0.3rem 0.9rem;
-        border-radius: 1rem;
-        font-size: 0.75rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .DetailProject a {

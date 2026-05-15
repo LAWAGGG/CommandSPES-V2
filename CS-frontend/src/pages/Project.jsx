@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BASE_URL } from "../utils/utils";
+import { BASE_URL, getLanguageLogo } from "../utils/utils";
 import { Link } from "react-router-dom";
 import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
@@ -89,13 +89,20 @@ export default function Project() {
                                                 <div className="ProjectDetail">
                                                     <h2>{item.title}</h2>
                                                     <div className="languages">
-                                                        {item.language.split("\n").map((lang, i) => {
-                                                            const langClass = lang.toLowerCase().replace(/#/g, 's');
-                                                            return (
-                                                                <span key={i} className={`${langClass}`}>
-                                                                    {lang}
-                                                                </span>
-                                                            )
+                                                        {item.language?.split("\n").map((lang, i) => {
+                                                            const logoUrl = getLanguageLogo(lang);
+                                                            if (logoUrl) {
+                                                                return (
+                                                                    <img 
+                                                                        key={i} 
+                                                                        src={logoUrl} 
+                                                                        alt={lang} 
+                                                                        className="lang-logo" 
+                                                                        title={lang}
+                                                                    />
+                                                                )
+                                                            }
+                                                            return null;
                                                         })}
                                                     </div>
                                                 </div>
