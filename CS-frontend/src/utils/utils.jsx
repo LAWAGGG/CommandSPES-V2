@@ -42,6 +42,7 @@ export const getLanguageLogo = (lang) => {
         "express": "express",
         "expressjs": "express",
         "mysql": "mysql",
+        "supabase": "supabase",
         "sql": "mysql",
         "sqlite": "sqlite",
         "postgresql": "postgresql",
