@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function GalleryDetail() {
     const [gallery, setgallery] = useState({})
+    const [allGalleries, setAllGalleries] = useState([])
     const [desc, setdesc] = useState("")
     const [images, setimages] = useState([])
     const [title, settitle] = useState("")
@@ -31,11 +32,13 @@ export default function GalleryDetail() {
     async function fetchGallery() {
         const res = await fetch("https://lawaggg.github.io/api/v1/SPES-Galery.json");
         const data = await res.json()
+        setAllGalleries(data)
         const found = data.find(item => item.id === Number(id))
         if(found) {
             setgallery(found)
             setdesc(found.description)
             settitle(found.title)
+            setCurrentSlide(0)
 
             // Gabung gambar jadi array
             const imageArray = [
@@ -50,7 +53,11 @@ export default function GalleryDetail() {
 
     useEffect(() => {
         fetchGallery()
-    }, [])
+    }, [id])
+
+    const currentIndexInAll = allGalleries.findIndex(item => item.id === Number(id))
+    const prevGallery = currentIndexInAll > 0 ? allGalleries[currentIndexInAll - 1] : null
+    const nextGallery = currentIndexInAll < allGalleries.length - 1 ? allGalleries[currentIndexInAll + 1] : null
 
     const prevSlide = () => {
         if (isTransitioning || images.length <= 1) return
@@ -182,6 +189,28 @@ export default function GalleryDetail() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
+            {/* Floating Desktop Navigation */}
+            <div className="FloatingNav desktop-only">
+                {prevGallery && (
+                    <Link to={`/gallery/${prevGallery.id}`} className="float-btn prev">
+                        <div className="float-icon">&larr;</div>
+                        <div className="float-content">
+                            <span className="float-label">Previous Memory</span>
+                            <span className="float-title">{prevGallery.title}</span>
+                        </div>
+                    </Link>
+                )}
+                {nextGallery && (
+                    <Link to={`/gallery/${nextGallery.id}`} className="float-btn next">
+                        <div className="float-icon">&rarr;</div>
+                        <div className="float-content">
+                            <span className="float-label">Next Memory</span>
+                            <span className="float-title">{nextGallery.title}</span>
+                        </div>
+                    </Link>
+                )}
+            </div>
+
             <div className="GalleryDetailContent">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -262,6 +291,42 @@ export default function GalleryDetail() {
                                         </>
                                     )}
                                 </>
+                            )}
+                        </div>
+                    </motion.div>
+
+                    {/* Global Gallery Navigation - Mobile/Tablet Only */}
+                    <motion.div 
+                        className="GalleryNavigation mobile-tablet-only"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6, duration: 0.5 }}
+                    >
+                        <div className="NavContainer">
+                            {prevGallery ? (
+                                <Link to={`/gallery/${prevGallery.id}`} className="nav-item prev">
+                                    <div className="nav-content">
+                                        <span className="nav-label">Previous</span>
+                                        <span className="nav-title">{prevGallery.title}</span>
+                                    </div>
+                                    <span className="nav-icon">&larr;</span>
+                                </Link>
+                            ) : (
+                                <div className="nav-item disabled"></div>
+                            )}
+
+                            <div className="nav-divider"></div>
+
+                            {nextGallery ? (
+                                <Link to={`/gallery/${nextGallery.id}`} className="nav-item next">
+                                    <span className="nav-icon">&rarr;</span>
+                                    <div className="nav-content">
+                                        <span className="nav-label">Next</span>
+                                        <span className="nav-title">{nextGallery.title}</span>
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className="nav-item disabled"></div>
                             )}
                         </div>
                     </motion.div>

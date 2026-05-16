@@ -239,7 +239,7 @@ export default function Home() {
       <NavBar></NavBar>
       {/* Header */}
       <div className="Bg-tech">
-        <div className="HomePage">
+        <div className="HomePage" id="home">
           <motion.div
             className="JsonCard floating-card"
             style={{ position: "relative", overflow: "hidden" }}
@@ -298,7 +298,7 @@ export default function Home() {
             </div>
             <div className="body" style={{ position: "relative", zIndex: 1 }}>
               <div className="Header" xyz="fade stagger-1 up-3 ease-out-back">
-                <div className="text">
+                <div className="text json-text">
                   <motion.h1 
                     className="h1"
                     initial={{ opacity: 0, x: -50 }}

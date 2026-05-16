@@ -3,6 +3,7 @@ import { BASE_URL, getLanguageLogo } from "../utils/utils";
 import { Link } from "react-router-dom";
 import NavBar from "../assets/NavBar";
 import Footer from "../assets/Footer";
+import ProjectImage from "../assets/ProjectImage";
 import "./Project.css";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -83,7 +84,7 @@ export default function Project() {
                                         <Link to={`/project/${item.id}`} style={{ textDecoration: 'none' }}>
                                             <div className="ProjectCard">
                                                 <div className="ProjectImages">
-                                                    <img src={item.image_url} alt={item.title} draggable="false" />
+                                                    <ProjectImage src={item.image_url} alt={item.title} />
                                                     <div className="imageOverlay"></div>
                                                 </div>
                                                 <div className="ProjectDetail">

@@ -6,7 +6,7 @@
 
 body {
     background-color: #051128;
-    font-family: "Poppins", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 /* --- Navigation & Header (Shared) --- */
@@ -143,6 +143,10 @@ nav:hover {
     .brand-text {
         display: none;
     }
+}
+
+.json-text{
+    font-family: 'Poppins', sans-serif;
 }
 
 /* --- Footer (Shared) --- */

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { data, Link, useParams } from "react-router-dom"
 import { BASE_URL, getLanguageLogo } from "../utils/utils"
+import ProjectImage from "../assets/ProjectImage";
 import "./Project.css";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -104,12 +105,12 @@ export default function ProjectDetail() {
         >
             <div className="ProjectImage" onClick={openFullscreen} style={{ cursor: 'zoom-in' }}>
                 <Link className="back" to="/projects" onClick={(e) => e.stopPropagation()}>&larr; Back</Link>
-                <motion.img
+                <ProjectImage
                     src={project.image_url}
-                    alt="Project Image"
+                    alt={project.title}
+                    isDetail={true}
                     initial={{ scale: 1.1 }}
                     animate={{ scale: 1 }}
-                    draggable="false"
                     transition={{ duration: 1.5 }}
                 />
             </div>
@@ -221,10 +222,10 @@ export default function ProjectDetail() {
                             onWheel={handleWheel}
                             style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                         >
-                            <motion.img
+                            <ProjectImage
                                 src={project.image_url}
-                                alt="Fullscreen Project"
-                                draggable="false"
+                                alt={project.title}
+                                isDetail={true}
                                 style={{
                                     transform: `translate(${panX}px, ${panY}px) scale(${zoomScale})`,
                                     maxWidth: '90%', maxHeight: '90%', objectFit: 'contain',

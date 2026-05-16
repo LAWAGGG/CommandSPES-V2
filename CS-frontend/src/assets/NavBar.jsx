@@ -8,10 +8,10 @@ export default function NavBar() {
         <div className="navbar">
             <nav>
                 <div className="title">
-                    <div className="image">
+                    <Link to={'/'} className="image">
                         <img src="/pp[1].png" alt="Logo" />
-                    </div>
-                    <h1 className="brand-text">CommandSPES!</h1>
+                    </Link>
+                    <h1 className="brand-text">CommandSPES</h1>
                     <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
                         <span></span>
                         <span></span>
