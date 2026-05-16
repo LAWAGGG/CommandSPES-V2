@@ -5,6 +5,7 @@ export const getLanguageLogo = (lang) => {
     const langMap = {
         "html": "html5",
         "css": "css3",
+        "capacitor": "capacitor",
         "javascript": "javascript",
         "js": "javascript",
         "typescript": "typescript",
@@ -42,6 +43,7 @@ export const getLanguageLogo = (lang) => {
         "expressjs": "express",
         "mysql": "mysql",
         "sql": "mysql",
+        "sqlite": "sqlite",
         "postgresql": "postgresql",
         "mongodb": "mongodb",
         "firebase": "firebase"
