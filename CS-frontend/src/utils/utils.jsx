@@ -48,7 +48,8 @@ export const getLanguageLogo = (lang) => {
         "postgresql": "postgresql",
         "mongodb": "mongodb",
         "firebase": "firebase",
-        "fastapi": "fastapi"
+        "fastapi": "fastapi",
+        "expo": "expo"
     };
 
     const icon = langMap[l];
