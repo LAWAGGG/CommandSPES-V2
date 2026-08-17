@@ -15,6 +15,14 @@ export default function Home() {
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  const positionOrder = {
+    Leader: 0,
+    "Vice Leader": 1,
+    Secretary: 2,
+    Treasurer: 3,
+    Security: 4,
+  };
+
   // Framer Motion Variants
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -496,6 +504,11 @@ export default function Home() {
           >
             {student
               .filter((item) => item.position !== "Member")
+              .sort(
+                (a, b) =>
+                  (positionOrder[a.position] ?? 99) -
+                  (positionOrder[b.position] ?? 99),
+              )
               .map((item, i) => (
                 <motion.div 
                   key={i} 
@@ -548,6 +561,7 @@ export default function Home() {
                     key={i}
                     variants={itemFadeIn}
                     whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                    style={{ backgroundImage: `url(${item.image_url_1})` }}
                   >
                     <img src={item.image_url_1} alt="Images" />
                   </motion.div>

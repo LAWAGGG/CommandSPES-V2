@@ -76,11 +76,6 @@ export default function Gallery() {
             <h1 className="carouselTitle">A day in Rpl Class!</h1>
             {/* Kembali ke settingan asli Anda tanpa Framer di dalam wrapper ini */}
             <div className="single-carousel-wrapper">
-              <span className="ribbon-decoration top-left"></span>
-              <span className="emoji-decoration top-right"></span>
-              <span className="laugh-decoration bottom-left"></span>
-              <span className="heart-decoration bottom-right"></span>
-
               <button onClick={prevSlide} className="carousel-btn left">
                 &#10094;
               </button>
@@ -91,7 +86,10 @@ export default function Gallery() {
                 </div>
               ) : (
                 gallery.length > 0 && (
-                  <div className="single-slide">
+                  <div
+                    className="single-slide"
+                    style={{ backgroundImage: `url(${gallery[currentIndex].image_url_1})` }}
+                  >
                     <img
                       src={gallery[currentIndex].image_url_1}
                       alt={gallery[currentIndex].title}
@@ -103,6 +101,11 @@ export default function Gallery() {
               <button onClick={nextSlide} className="carousel-btn right">
                 &#10095;
               </button>
+
+              <span className="ribbon-decoration top-left"></span>
+              <span className="emoji-decoration top-right"></span>
+              <span className="laugh-decoration bottom-left"></span>
+              <span className="heart-decoration bottom-right"></span>
             </div>
           </motion.div>
 
@@ -140,6 +143,7 @@ export default function Gallery() {
                       key={i}
                       ref={addToRefs}
                       className="GalleryCard fade-in"
+                      style={{ backgroundImage: `url(${item.image_url_1})` }}
                     >
                       <img src={item.image_url_1} alt={item.title} />
                     </Link>

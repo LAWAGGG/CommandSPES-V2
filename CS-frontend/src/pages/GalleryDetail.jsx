@@ -248,7 +248,7 @@ export default function GalleryDetail() {
                                         onClick={() => openFullscreen(currentSlide)}
                                     >
                                         {images.map((image, index) => (
-                                            <div key={index} className="carousel-slide">
+                                            <div key={index} className="carousel-slide" style={{ backgroundImage: `url(${image})` }}>
                                                 <img
                                                     src={image}
                                                     draggable="false"
